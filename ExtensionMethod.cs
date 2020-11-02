@@ -16,7 +16,9 @@ namespace ConsoleApp
 
     partial   class A
     {
-       partial void MethodA(string message);
+        public static long baseline { get; }
+
+        partial void MethodA(string message);
 
         public void OutParamMethod(out int id, out string message, out bool choice)
         {
@@ -33,7 +35,14 @@ namespace ConsoleApp
         {
             Console.WriteLine("From static method");
         }
+        // Static constructor is called at most one time, before any
+        // instance constructor is invoked or member is accessed.
+        static A()
+        {
+            baseline = DateTime.Now.Ticks;
+        }
     }
+
 
   
    
